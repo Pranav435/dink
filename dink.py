@@ -1,11 +1,25 @@
 import sys
 import subprocess
-from win32 import win32gui
-import win32con
+import platform
 from playsound import playsound
-cur_window = win32gui.GetForegroundWindow()
 
 args = sys.argv[1:]
 subprocess.run(args, shell=True)
-win32gui.FlashWindowEx(cur_window, 15, 5, 400) # Nvm i fixed it
-playsound('notification.wav')
+
+def windows_dink():
+    import win32con
+    from win32 import win32gui
+    cur_window = win32gui.GetForegroundWindow()
+    win32gui.FlashWindowEx(cur_window, 15, 5, 400) # Nvm i fixed it
+
+def linux_dink():
+    pass
+
+def that_other_os_dink():
+    pass
+
+if __name__ == '__main__':
+    if platform.system() == 'Windows':
+        windows_dink()
+
+    playsound('notification.wav')
