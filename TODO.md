@@ -30,3 +30,11 @@
 - uninstall python
 - uninstall python
 - chill idk
+
+# Stuff to do for Reena
+- Exist.
+- Join call.
+- Learn.
+- Try not to spontaneously combust.
+- Contribute maybe.
+- Tell us TF is Pineapple Sambar?
