@@ -31,7 +31,7 @@
 - uninstall python
 - chill idk
 
-# Stuff to do for Reena
+## Stuff to do for Reena
 - Exist.
 - Join call.
 - Learn.
