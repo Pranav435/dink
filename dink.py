@@ -3,8 +3,23 @@ import subprocess
 import platform
 from playsound import playsound
 
+toast=False
+command=1
 args = sys.argv[1:]
-subprocess.run(args, shell=True)
+allowed_args={"--toast","-t"}
+for i in range(0,len(args)):
+	if args[i] not in allowed_args:
+		if not args[i][0]=="-":
+			command=i
+			break
+		else:
+			raiseException(f"{args[i]} is not a valid flag")
+
+	if args[i]=="--toast" or args[i]=="-t":
+		toast=True
+
+
+subprocess.run(args[command:], shell=True)
 
 def windows_dink():
     import win32con
@@ -23,3 +38,8 @@ if __name__ == '__main__':
         windows_dink()
 
     playsound('notification.wav')
+    if toast:
+        from plyer import notification
+        notification.notify(title="Command done",message="Kavin you suck",timeout=0)
+
+        
