@@ -21,5 +21,9 @@ def that_other_os_dink():
 if __name__ == '__main__':
     if platform.system() == 'Windows':
         windows_dink()
+    elif platform.system() == 'Linux'
+        linux_dink()
+    else:
+        that_other_os_dink()
 
     playsound('notification.wav')
