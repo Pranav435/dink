@@ -9,7 +9,7 @@ flash = False
 numflash=5
 
 def parse(args):
-    global flash, toast, numflash
+    global flash, toast
     if '-t' in args:
         toast = True
     elif '-f' in args:
@@ -34,28 +34,30 @@ for i in range(0,len(args)):
 		if args[i+1][0] in ["1","2","3","4","5","6","7","8","9","0"]:
 			numflash=int(args[i+1])
 
-parse(args[:command_pointer])
 
 if __name__ == '__main__':
+
+    command = args[command_pointer:]
+    parse(args[:command_pointer])
+
     if platform.system() == 'Windows':
 
         if flash:
             from win32 import win32gui
             import win32con
             cur_window = win32gui.GetForegroundWindow()
-            subprocess.run(args[command_pointer:], shell=True)
+            subprocess.run(command, shell=True)
             win32gui.FlashWindowEx(cur_window, 15, numflash, 400) # Nvm i fixed it
         else:
-            subprocess.run(args[command_pointer:], shell=True)
-        if toast:
-            from plyer import notification
-            notification.notify(title="Finished",message="Your command has just finished. Go suck something.",timeout=0)
+            subprocess.run(command, shell=True)
 
     elif platform.system() == 'Linux':
         pass
     else:
         pass
-    try:
-        playsound('notification.wav')
-    except:
-        pass
+
+    playsound('.\\notification.wav')
+
+    if toast:
+        from plyer import notification
+        notification.notify(title="Command Finished",message=f"{}",timeout=1)
