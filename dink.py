@@ -3,20 +3,23 @@ import subprocess
 import platform
 from playsound import playsound
 
-# FLAGS
-toast = False
-flash = False
-
-def parse(args):
-    global flash, toast
-    if '--toast' in args or '-t' in args:
-        toast = True
-    elif '--flash' in args or '-f' in args:
-        flash = True
-
-allowed_args = {'--toast', '-t', '--flash', '-f'}
-
+toast=False
+command=1
 args = sys.argv[1:]
+allowed_args={"--toast","-t"}
+for i in range(0,len(args)):
+	if args[i] not in allowed_args:
+		if not args[i][0]=="-":
+			command=i
+			break
+		else:
+			raiseException(f"{args[i]} is not a valid flag")
+
+	if args[i]=="--toast" or args[i]=="-t":
+		toast=True
+
+
+subprocess.run(args[command:], shell=True)
 
 for i in range(0,len(args)):
 	if args[i] not in allowed_args:
@@ -46,3 +49,6 @@ if __name__ == '__main__':
         pass
 
     playsound('notification.wav')
+    if toast:
+        from plyer import notification
+        notification.notify(title="Command done",message="Kavin you suck",timeout=0)
