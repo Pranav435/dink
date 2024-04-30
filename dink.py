@@ -6,36 +6,40 @@ from playsound import playsound
 # FLAGS
 toast = False
 flash = False
+
 numflash=5
 
 def parse(args):
-    global flash, toast
+    global flash, toast, numflash
     if '-t' in args:
         toast = True
-    elif '-f' in args:
+    if '-f' in args:
         flash = True
+        index = args.index('-f')+1
+        if index < len(args):
+            if args[index].isnumeric():
+                numflash = int(args[index])
 
 allowed_args = {'-t', '-f'}
 
-args = sys.argv[1:]
-
-for i in range(0,len(args)):
-	if args[i] not in allowed_args:
-		if args[i][0] != "-" and not args[i][0] in ["1","2","3","4","5","6","7","8","9","0"]:
-			command_pointer = i
-			break
-		elif args[i][0] in ["1","2","3","4","5","6","7","8","9","0"]:
-			continue
-
-		else:
-			raise Exception(f"{args[i]} is not a valid flag")
-	if args[i]=="-f":
-		flash=True
-		if args[i+1][0] in ["1","2","3","4","5","6","7","8","9","0"]:
-			numflash=int(args[i+1])
-
-
 if __name__ == '__main__':
+
+    args = sys.argv[1:]
+
+    value_flag = False
+
+    for i in range(0, len(args)):
+        if args[i] not in allowed_args:
+            if args[i][0] != "-" and not args[i][0] in '1234567890':
+                command_pointer = i
+                break
+            else:
+                if not value_flag:
+                    raise Exception(f"{args[i]} is not a valid flag")
+                else:
+                    value_flag = False
+        else:
+            value_flag = True
 
     command = args[command_pointer:]
     parse(args[:command_pointer])
@@ -60,4 +64,4 @@ if __name__ == '__main__':
 
     if toast:
         from plyer import notification
-        notification.notify(title="Command Finished",message=f"The command has finished.",timeout=1)
+        notification.notify(title="Command Completed", message=f"{' '.join(command)} has completed!", timeout=0)
