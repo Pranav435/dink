@@ -56,6 +56,6 @@ if __name__ == '__main__':
     else:
         pass
     try:
-        playsound('notification.wav')
+        playsound('./notification.wav')
     except:
         pass
