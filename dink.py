@@ -8,6 +8,7 @@ toast = False
 flash = False
 
 numflash=5
+version_number="0.0.0 kavin you are stupid update"
 
 def parse(args):
     global flash, toast, numflash
@@ -20,11 +21,14 @@ def parse(args):
             if args[index].isnumeric():
                 numflash = int(args[index])
 
-allowed_args = {'-t', '-f'}
+allowed_args = {'-t', '-f','-v'}
 
 if __name__ == '__main__':
 
     args = sys.argv[1:]
+    if '-v' in args:
+        print(f"Dink V {version_number}.")
+        quit()
 
     value_flag = False
 
