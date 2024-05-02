@@ -30,6 +30,9 @@ if __name__ == '__main__':
         print(f"Dink V {version_number}.")
         quit()
 
+    if '-h' in args:
+        print("Run dink along with the command you want to be notified about once completed.\nFlags for configuration:\n-t: displays a toast message once the command has finished executing.\n-f: (windows only) flashes the icon of the command window on the taskbar once the command has completed execution. By default, the window will flash 5 times. Include an integer to specify the number of times you want the window to flash after the flag.\n-v: Displays the version number you are running.\nYeet.")
+        quit()
     value_flag = False
 
     for i in range(0, len(args)):
