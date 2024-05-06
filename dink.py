@@ -2,16 +2,18 @@ import sys
 import subprocess
 import platform
 from playsound import playsound
+import pyttsx3
 
 # FLAGS
 toast = False
 flash = False
+tts=False
 
 numflash=5
 version_number="0.0.0 kavin you are stupid update"
 
 def parse(args):
-    global flash, toast, numflash
+    global flash, toast, numflash, tts
     if '-t' in args:
         toast = True
     if '-f' in args:
@@ -20,8 +22,10 @@ def parse(args):
         if index < len(args):
             if args[index].isnumeric():
                 numflash = int(args[index])
+    if '-tts' in args:
+        tts=True
 
-allowed_args = {'-t', '-f','-v'}
+allowed_args = {'-t', '-f','-v','-h','-tts'}
 
 if __name__ == '__main__':
 
@@ -31,7 +35,7 @@ if __name__ == '__main__':
         quit()
 
     if '-h' in args:
-        print("Run dink along with the command you want to be notified about once completed.\nFlags for configuration:\n-t: displays a toast message once the command has finished executing.\n-f: (windows only) flashes the icon of the command window on the taskbar once the command has completed execution. By default, the window will flash 5 times. Include an integer to specify the number of times you want the window to flash after the flag.\n-v: Displays the version number you are running.\nYeet.")
+        print("Run dink along with the command you want to be notified about once completed.\nFlags for configuration:\n-t: displays a toast message once the command has finished executing.\n-f: (windows only) flashes the icon of the command window on the taskbar once the command has completed execution. By default, the window will flash 5 times. Include an integer to specify the number of times you want the window to flash after the flag.\n-tts: specifies if the system tts voice should be used to notify you of command completion.\n-v: Displays the version number you are running.\nYeet.")
         quit()
     value_flag = False
 
@@ -72,3 +76,8 @@ if __name__ == '__main__':
     if toast:
         from plyer import notification
         notification.notify(title="Command Completed", message=f"{' '.join(command)} has completed!", timeout=0)
+
+    if tts:
+        engine=pyttsx3.init()
+        engine.say("Command completed")
+        engine.runAndWait()
