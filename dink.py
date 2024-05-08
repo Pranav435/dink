@@ -10,7 +10,7 @@ flash = False
 tts=False
 
 numflash=5
-version_number="0.0.0 kavin you are stupid update"
+version_number="0.0.0 Kavin you are stupid update"
 
 def parse(args):
     global flash, toast, numflash, tts
