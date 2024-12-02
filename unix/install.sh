@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the source file paths
-dink_path="../dink"
+dink_path="./dink"
 wav_path="../Source/notification.wav"
 
 # Define the target directory in the PATH (e.g., /usr/local/bin)
