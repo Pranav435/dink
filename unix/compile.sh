@@ -1,1 +1,0 @@
-pyinstaller --onefile --hidden-import=plyer.platforms.win.notification ../Source/dink.py
