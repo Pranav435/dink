@@ -9,16 +9,16 @@ import os
 toast = False
 flash = False
 tts=False
-
+mute=False
 numflash=5
 if platform.system() == "Windows":
     sound_path = os.path.join(os.getenv('LOCALAPPDATA'), 'Dink', 'notification.wav')
 else:
     sound_path="./notification.wav"
-version_number="0.0.0 Kavin you are stupid update"
+version_number="1.0.0"
 
 def parse(args):
-    global flash, toast, numflash, tts
+    global flash, toast, numflash, tts,mute
     if '-t' in args:
         toast = True
     if '-f' in args:
@@ -29,8 +29,9 @@ def parse(args):
                 numflash = int(args[index])
     if '-tts' in args:
         tts=True
-
-allowed_args = {'-t', '-f','-v','-h','-tts'}
+    if '-m' in args:
+        mute=True
+allowed_args = {'-t', '-f','-v','-h','-tts','-m'}
 
 if __name__ == '__main__':
 
@@ -74,11 +75,12 @@ if __name__ == '__main__':
         pass
     else:
         pass
-    try:
-        playsound(sound_path)
-    except:
-        print("The provided notification file does not exist. Please correct the path and try again.")
-        sys.exit()
+    if not mute:
+        try:
+            playsound(sound_path)
+        except:
+            print("The provided notification file does not exist. Please correct the path and try again.")
+            sys.exit()
     if toast:
         from plyer import notification
         notification.notify(title="Command Completed", message=f"{' '.join(command)} has completed!", timeout=0)
