@@ -36,6 +36,10 @@ allowed_args = {'-t', '-f','-v','-h','-tts','-m'}
 if __name__ == '__main__':
 
     args = sys.argv[1:]
+    if len(args) == 0:
+        print("Invalid input. Usage: Run dink along with the command to be notified about. Run dink -h for more commands.")
+        sys.exit()
+
     if '-v' in args:
         print(f"Dink V {version_number}.")
         sys.exit()
