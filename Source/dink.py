@@ -64,21 +64,19 @@ if __name__ == '__main__':
     command = args[command_pointer:]
     parse(args[:command_pointer])
 
-    if platform.system() == 'Windows':
+    if flash:
 
-        if flash:
+        if platform.system()=="Windows":
             from win32 import win32gui
             import win32con
             cur_window = win32gui.GetForegroundWindow()
             subprocess.run(command, shell=True)
             win32gui.FlashWindowEx(cur_window, 15, numflash, 400) # Nvm i fixed it
         else:
-            subprocess.run(command, shell=True)
+            pass
 
-    elif platform.system() == 'Linux':
-        pass
     else:
-        pass
+        subprocess.run(command, shell=True)
     if not mute:
         try:
             playsound(sound_path)
