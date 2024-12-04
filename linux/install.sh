@@ -2,7 +2,7 @@
 
 # Define the source file paths
 dink_path="./dink"
-wav_path="./notification.wav"
+wav_path="../assets/notification.wav"
 
 # Define the target directory in the PATH (e.g., /usr/local/bin)
 target_dir="/usr/local/bin"

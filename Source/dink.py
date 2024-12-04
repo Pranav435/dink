@@ -14,7 +14,7 @@ numflash=5
 if platform.system() == "Windows":
     sound_path = os.path.join(os.getenv('LOCALAPPDATA'), 'Dink', 'notification.wav')
 else:
-    sound_path="./notification.wav"
+    sound_path="../assets/notification.wav"
 version_number="1.0.0"
 
 def parse(args):
